@@ -13,8 +13,12 @@ tasks:
 
   - name: Leer contenido del último archivo spool
     ibm.power_ibmi.ibmi_sql_query:
-        query: |
-          SELECT * FROM TABLE(SYSTOOLS.SPOOLED_FILE_DATA('{{ spool_details.results[0].JOB_NAME }}', '{{ spool_details.results[0].SPOOLED_FILE_NAME }}')) AS SPOOLDATA;
+      sql: >
+          SELECT * FROM TABLE(SYSTOOLS.SPOOLED_FILE_DATA(
+          '{{ spool_details.results[0].JOB_NAME }}',
+          '{{ spool_details.results[0].SPOOLED_FILE_NAME }}'))
+           AS SPOOLDATA;
+
     when: spool_details.results | length > 0
     register: spoolcontent
 
