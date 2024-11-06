@@ -1,10 +1,11 @@
 ---
 - name: Ejecutar comando AS400
-  hosts: all
+  hosts: CRI400G
   tasks:
     - name: Ejecutar comando en AS400
       ibm.power_ibmi.ibmi_cl_command:
-        cmd: 'WRKOBJBRM OBJ(*ALL) SLTDATE(FROMDATE(100124)) TODATE(110124)) SAVSTS(*ALL) SORT(*LIB) OUTPUT(*PRINT)'
+        cmd: 'WRKOBJBRM OBJ(*ALL) SLTDATE(100124) SAVSTS(*ALL) SORT(*LIB) OUTPUT(*)'
+        joblog: true
       register: result
 
     - name: Mostrar resultado
