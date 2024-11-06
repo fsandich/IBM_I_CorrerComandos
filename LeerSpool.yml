@@ -6,7 +6,7 @@ tasks:
     ibm.power_ibmi.ibmi_sql_query:
       sql: "SELECT JOB_NAME, JOB_NUMBER, SPOOLED_FILE_NAME, OUTPUT_QUEUE, USER_NAME
           FROM QSYS2.OUTPUT_QUEUE_ENTRIES
-          WHERE USER_NAME = 'TU_USUARIO'
+          WHERE USER_NAME = 'CLIENTEANS'
           ORDER BY JOB_NUMBER DESC
           FETCH FIRST ROW ONLY"
     register: spooldetalis
