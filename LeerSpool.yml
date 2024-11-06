@@ -14,5 +14,3 @@ tasks:
   - name: Mostrar resultado
     ansible.builtin.debug:
       var: spooldetalis
-
-  
