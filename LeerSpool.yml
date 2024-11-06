@@ -1,27 +1,25 @@
 ---
-name: leer spool
-hosts: CRI400G
-tasks:
-  - name: Leer spool
-    ibm.power_ibmi.ibmi_sql_query:
-      sql: "SELECT JOB_NAME, SPOOLED_FILE_NAME, USER_NAME FROM QSYS2.OUTPUT_QUEUE_ENTRIES WHERE USER_NAME = 'CLIENTEANS' FETCH FIRST ROW ONLY"
-    register: spooldetalis
+- name: leer spool
+  hosts: CRI400G
+  tasks:
+   - name: Leer spool
+     ibm.power_ibmi.ibmi_sql_query:
+       sql: "SELECT JOB_NAME, SPOOLED_FILE_NAME, USER_NAME FROM QSYS2.OUTPUT_QUEUE_ENTRIES WHERE USER_NAME = 'CLIENTEANS' FETCH FIRST ROW ONLY"
+     register: spooldetalis
 
-  - name: Mostrar resultado
-    ansible.builtin.debug:
-      var: spooldetalis
+   - name: Mostrar resultado
+     ansible.builtin.debug:
+       var: spooldetalis
 
-  - name: Leer contenido del último archivo spool
-    ibm.power_ibmi.ibmi_sql_query:
+   - name: Leer contenido del último archivo spool
+     ibm.power_ibmi.ibmi_sql_query:
       sql: >
           SELECT * FROM TABLE(SYSTOOLS.SPOOLED_FILE_DATA(
-          '{{ spool_details.results[0].JOB_NAME }}',
-          '{{ spool_details.results[0].SPOOLED_FILE_NAME }}'))
+          '{{ spooldetails.results[0].JOB_NAME }}',
+          '{{ spooldetails.results[0].SPOOLED_FILE_NAME }}'))
            AS SPOOLDATA;
+     ßregister: spoolcontent
 
-    when: spool_details.results | length > 0
-    register: spoolcontent
-
-  - name: Mostrar contenido del archivo spool
-    ansible.builtin.debug:
-      var: spoolcontent
+   - name: Mostrar contenido del archivo spool
+     ansible.builtin.debug:
+       var: spoolcontent
