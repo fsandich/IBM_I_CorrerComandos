@@ -1,0 +1,23 @@
+---
+- name: Pipeline para exportar y transferir archivo desde IBM i
+  hosts: ibmi_system
+  gather_facts: false
+  tasks:
+    - name: Exportar archivo físico a CSV en IFS
+      ibm.power_ibmi.ibm_cl_command:
+        cmd: "CPYTOIMPF FROMFILE(MYLIB/MYFILE) TOSTMF('/tmp/MYFILE.csv') MBROPT(*REPLACE) STMFCODPAG(*PCASCII)"
+      register: cpytoimpf_result
+
+    - name: Verificar si CPYTOIMPF se ejecutó correctamente
+      debug:
+        msg: "{{ cpytoimpf_result.stdout }}"
+
+    - name: Transferir archivo CSV desde IFS al localhost
+      fetch:
+        src: /tmp/MYFILE.csv
+        dest: /ruta/local/en/localhost/
+        flat: yes
+
+    - name: Limpiar archivo temporal del IFS
+      ibm.power_ibmi.ibm_cl_command:
+        cmd: "RMVLNK OBJLNK('/tmp/MYFILE.csv')"
