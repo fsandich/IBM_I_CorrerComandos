@@ -24,3 +24,4 @@
 
 
 {'error': '*** error CPYTOIMPF FROMFILE(LIBPASES/PTFS) TOSTMF(/tmp/PTFS.csv) MBROPT(*REPLACE) STMFCODPAG(*PCASCII)', 'error1': '202', 'version': 'XML Toolkit 2.0.2-dev', 'xmlhint': 'CPYTOIMPF FROMFILE(LIBPASES/PTFS) TOSTMF(/tmp/PTFS.csv) MBRO', 'xmlhint2': 'CPYTOIMPF FROMFILE(LIBPASES/PTFS) TOSTMF(/tmp/PTFS.csv) MBRO', 'jobipc': '*na', 'jobipcskey': 'FFFFFFFF', 'jobname': 'QSQSRVR', 'jobuser': 'QUSER', 'jobnbr': '803002', 'curuser': 'CLIENTEANS', 'ccsid': '284', 'dftccsid': '284', 'paseccsid': '0', 'syslibl': 'QSYS QSYS2 QHLPSYS QUSRSYS', 'usrlibl': 'COMLIB QTEMP DMIRROR11 QGPL ZFUNC P$CMLIBPRO P$CMDATPRO CUBDDAT TPRCDAT'}
+"Unsupported parameters for (ansible.builtin.find) module: resource. Supported parameters include: age, age_stamp, contains, depth, excludes, file_type, follow, get_checksum, hidden, paths, patterns, read_whole_file, recurse, size, use_regex (exclude, name, path, pattern).",
