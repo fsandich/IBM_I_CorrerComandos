@@ -4,7 +4,7 @@
   tasks:
     - name: Ejecutar comando en AS400
       ibm.power_ibmi.ibmi_cl_command:
-        cmd: 'WRKOBJBRM OBJ(*ALL) SLTDATE(100124) SAVSTS(*ALL) SORT(*LIB) OUTPUT(*)'
+        cmd: 'WRKOBJBRM OBJ(*ALL) SLTDATE(100124) SAVSTS(*ALL) SORT(*LIB) OUTPUT(*)''DSPPTF LICPGM(*ALL) OUTPUT(*PRINT)'
         joblog: true
       register: result
 
