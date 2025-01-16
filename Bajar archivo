@@ -63,3 +63,73 @@
         object_names: ptfs
         dest: /PTFS
         flat: true
+
+
+
+
+---
+- name: Ejecutar comando AS400
+  hosts: CRI400G
+  tasks:
+    - name: Ejecutar comando en AS400
+      ibm.power_ibmi.ibmi_cl_command:
+        cmd: 'DSPPTF LICPGM(*ALL) OUTPUT(*OUTFILE) OUTFILE(LIBPASES/PTFS)'
+        joblog: true
+      register: result
+
+    - name: Mostrar resultado
+      ansible.builtin.debug:
+        var: result.stdout_lines
+
+    - name: buscar archivo
+      ibm.power_ibmi.ibmi_object_find:
+        object_name: 'PTFS'
+        lib_name: 'LIBPASES'
+      register: resultptfs
+
+    - name: Resultado de la busqueda
+      ansible.builtin.debug:
+        var: resultptfs
+
+    - name: Descargar Archivo desde AS400
+      ibm.power_ibmi.ibmi_fetch:
+        object_names: 'PTFS'
+        lib_name: 'LIBPASES'
+        dest: '/PTFS'
+
+SSH password: 
+PLAY [Ejecutar comando AS400] **************************************************
+TASK [Gathering Facts] *********************************************************
+ok: [CRI400G]
+TASK [Ejecutar comando en AS400] ***********************************************
+ok: [CRI400G]
+TASK [Mostrar resultado] *******************************************************
+ok: [CRI400G] => {
+    "result.stdout_lines": []
+}
+TASK [buscar archivo] **********************************************************
+ok: [CRI400G]
+TASK [Resultado de la busqueda] ************************************************
+ok: [CRI400G] => {
+    "resultptfs": {
+        "changed": false,
+        "delta": "0:00:00.333243",
+        "end": "2025-01-16 17:49:34.007201",
+        "failed": false,
+        "job_log": [],
+        "object_list": [
+            {
+                "IASP_NUMBER": 0,
+                "LAST_RESET_TIMESTAMP": "",
+                "LAST_USED_TIMESTAMP": "2025-01-16 00:00:00",
+                "OBJATTRIBUTE": "PF",
+                "OBJCREATED": "2025-01-16 15:49:47",
+                "OBJDEFINER": "CLIENTEANS",
+                "OBJLIB": "LIBPASES",
+                "OBJLONGSCHEMA": "LIBPASES",
+                "OBJNAME": "PTFS",
+                "OBJOWNER": "PCSUPORT",
+                "OBJSIZE": 1875968,
+                "OBJTYPE": "*FILE",
+                "TEXT": ""…
+TASK [Descargar Archivo desde AS400] *******************************************
