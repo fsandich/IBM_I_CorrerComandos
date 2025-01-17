@@ -158,3 +158,6 @@ ok: [CRI400G] => {
     ]
 }
 https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops
+
+
+fatal: [CRI400G]: FAILED! => {"changed": false, "checksum": "", "delta": "", "dest": "", "file": "", "job_log": [], "md5sum": "", "msg": "The module ibmi_object_find was not found in configured module paths", "rc": 255, "remote_checksum": "", "remote_md5sum": "", "stderr": "", "stdout": ""}
