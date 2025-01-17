@@ -157,3 +157,4 @@ ok: [CRI400G] => {
         }
     ]
 }
+https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops
