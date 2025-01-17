@@ -136,3 +136,24 @@ TASK [Descargar Archivo desde AS400] *******************************************
 fatal: [CRI400G]: FAILED! => {"changed": false, "checksum": "", "delta": "", "dest": "", "file": "", "job_log": [], "md5sum": "", "msg": "The module ibmi_object_find was not found in configured module paths", "rc": 255, "remote_checksum": "", "remote_md5sum": "", "stderr": "", "stdout": ""}
 PLAY RECAP *********************************************************************
 CRI400G                    : ok=5    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+
+ok: [CRI400G] => {
+    "resultptfs.object_list": [
+        {
+            "IASP_NUMBER": 0,
+            "LAST_RESET_TIMESTAMP": "",
+            "LAST_USED_TIMESTAMP": "2025-01-16 00:00:00",
+            "OBJATTRIBUTE": "PF",
+            "OBJCREATED": "2025-01-16 15:49:47",
+            "OBJDEFINER": "CLIENTEANS",
+            "OBJLIB": "LIBPASES",
+            "OBJLONGSCHEMA": "LIBPASES",
+            "OBJNAME": "PTFS",
+            "OBJOWNER": "PCSUPORT",
+            "OBJSIZE": 1875968,
+            "OBJTYPE": "*FILE",
+            "TEXT": ""
+        }
+    ]
+}
