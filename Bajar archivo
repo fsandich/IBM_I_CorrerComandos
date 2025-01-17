@@ -161,3 +161,36 @@ https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authent
 
 
 fatal: [CRI400G]: FAILED! => {"changed": false, "checksum": "", "delta": "", "dest": "", "file": "", "job_log": [], "md5sum": "", "msg": "The module ibmi_object_find was not found in configured module paths", "rc": 255, "remote_checksum": "", "remote_md5sum": "", "stderr": "", "stdout": ""}
+
+
+
+---
+- name: Ejecutar comando AS400
+  hosts: CRI400G
+  tasks:
+    - name: Ejecutar comando en AS400
+      ibm.power_ibmi.ibmi_cl_command:
+        cmd: 'DSPPTF LICPGM(*ALL) OUTPUT(*OUTFILE) OUTFILE(LIBPASES/PTFS)'
+        joblog: true
+      register: result
+
+    - name: Mostrar resultado
+      ansible.builtin.debug:
+        var: result.stdout_lines
+
+    - name: buscar archivo
+      ibm.power_ibmi.ibmi_object_find:
+        object_name: 'PTFS'
+        lib_name: 'LIBPASES'
+      register: resultptfs
+
+    - name: Resultado de la busqueda
+      ansible.builtin.debug:
+        var: resultptfs.object_list[0].OBJNAME
+
+    - name: Descargar Archivo desde AS400
+      ibm.power_ibmi.ibmi_fetch:
+        object_names: '{{ resultptfs.object_list[0].OBJNAME }}'
+        lib_name: 'LIBPASES'
+        savefile_name: 'PRUEBA'
+        dest: '/PTFS'
